@@ -1,0 +1,38 @@
+<div class="container">
+    <!-- Content here -->
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2 loginForm">
+            <form [formGroup]="loginForm" novalidate>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">User name</label>
+                    <input type="text" class="form-control"  placeholder="Enter User name" formControlName="username" [(ngModel)]="username" >
+                    <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)"
+                        class="alert alert-danger">
+                            username is required.
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" placeholder="Password" formControlName="password" [(ngModel)]="password" >
+                    <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="loginForm.controls['password'].errors.required">
+                            password is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="errorMsg">
+                    <div class="alert alert-danger">
+                        {{errorMsg}}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="loginForm.controls['username'].invalid || loginForm.controls['password'].invalid"
+                (click) = "submit()" >Submit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
